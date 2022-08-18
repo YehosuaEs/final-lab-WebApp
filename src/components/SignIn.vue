@@ -1,8 +1,13 @@
 <template>
     <div>Sign In</div>
-    <PersonalRouter :route="route" :buttonText="buttonText" />
-    <p>Time to build up the Final Project!</p>
-    <p class="wu-text">Wu Tang Forever</p>
+    <div>
+        Don’t have an account? &nbsp;
+        <PersonalRouter :route="route" :buttonText="buttonText" />
+    </div>
+    <form action="">
+        <p>Fill in this form to login into your account.</p>
+        <hr />
+    </form>
 </template>
 
 <script setup>
@@ -15,7 +20,7 @@ import { storeToRefs } from "pinia";
 
 // Route Variables
 const route = "/auth/sign-up";
-const buttonText = "Test the Sign Up Route";
+const buttonText = "Sign Up";
 
 // Input Fields
 const email = ref("");
@@ -52,10 +57,6 @@ const signIn = async () => {
 </script>
 
 <style>
-.wu-text {
-    color: black;
-}
-
 .form {
     display: flex;
     flex-direction: column;
