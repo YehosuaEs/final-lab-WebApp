@@ -27,15 +27,6 @@
    </li>
     <li>
       <p>A store and a database that your app can call data from</p>
-      <p>Styles</p>
-   </li>
-    <li>
-      <p>Styles</p>
-      <a>Presentation</a>
-   </li>
-    <li>
-      <p>Styles</p>
-      <p>Presentation</p>
    </li>
   </ul>
 </details>
@@ -125,10 +116,10 @@ npm run build
 
 ## Tech Stack
 
-Client: Vue.js, Vite (dev server)
-Router: Vue Router
-Store: Pinia and Pinia Persist for persistent login
-Database as a service: Supabase
+<p>Client: Vue.js, Vite (dev server)</p>
+<p>Router: Vue Router</p>
+<p>Store: Pinia and Pinia Persist for persistent login</p>
+<p>Database as a service: Supabase</p>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
