@@ -107,7 +107,7 @@ const handleSignUp = async () => {
             email.value + " " + password.value + " " + repeatPassword.value
         );
 
-        // redirects user to the homeView /* path = > LOGIN????  */
+        // redirects user to the homeView??? /* path = > LOGIN????  */
         redirect.push({ path: "/" });
     } catch (error) {
         // displays error message
