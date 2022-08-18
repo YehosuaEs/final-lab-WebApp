@@ -4,7 +4,7 @@
         Don’t have an account? &nbsp;
         <PersonalRouter :route="route" :buttonText="buttonText" />
     </div>
-    <form action="">
+    <form>
         <p>Fill in this form to login into your account.</p>
         <hr />
     </form>
@@ -30,7 +30,7 @@ const password = ref("");
 const errorMsg = ref("");
 
 //Show hide password variables
-const passwordFieldType = computed(() =>
+const passwordInputType = computed(() =>
     hidePassword.value ? "password" : "text"
 );
 const hidePassword = ref(true);
@@ -39,7 +39,7 @@ const hidePassword = ref(true);
 const redirect = useRouter();
 
 // Arrow function to Signin user to supaBase
-const signIn = async () => {
+const handleLogIn = async () => {
     try {
         // calls the user store and send the users info to backend to logIn
         await useUserStore().signIn(email.value, password.value);
