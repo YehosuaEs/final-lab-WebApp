@@ -4,7 +4,7 @@
         Have an account? &nbsp;
         <PersonalRouter :route="route" :buttonText="buttonText" />
     </div>
-    <form @submit.prevent="handleSignUp">
+    <form @submit.prevent="handleSignUpEx()">
         <div>
             <p>Please fill in this form to create an account.</p>
             <hr />
@@ -65,10 +65,17 @@
 import PersonalRouter from "./PersonalRouter.vue";
 import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
+import { useUserStore } from "../stores/user";
+
+/* -- Pruebas-- */
+import { supabase } from "../supabase";
 
 // Route Variables as Props
 const route = "/auth/login";
 const buttonText = "Log in";
+
+// Access to the constants store
+const user = useUserStore();
 
 // Input Fields
 const email = ref("");
@@ -98,14 +105,18 @@ const passwordInputType = computed(() =>
 const redirect = useRouter();
 
 // Arrow function to SignUp user to supaBase with a timeOut() method for showing the error
+async function handleSignUpEx() {
+    const { user, error } = await supabase.auth.signUp({
+        email: email.value,
+        password: password.value,
+    });
+    console.log(email.value);
+}
+
 const handleSignUp = async () => {
     try {
         // calls the user store and send the users info to backend to logIn
-        await useUserStore().signUp(email.value, password.value);
-
-        console.log(
-            email.value + " " + password.value + " " + repeatPassword.value
-        );
+        await user.signUp(email.value, password.value);
 
         // redirects user to the homeView??? /* path = > LOGIN????  */
         redirect.push({ path: "/" });
