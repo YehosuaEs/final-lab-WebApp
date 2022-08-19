@@ -81,7 +81,6 @@ const passwordIconClick = computed(() =>
         ? (icon.value = "visibility")
         : (icon.value = "visibility_off")
 );
-const clickEye = () => {};
 const passwordInputType = computed(() =>
     hidePassword.value ? "password" : "text"
 );
