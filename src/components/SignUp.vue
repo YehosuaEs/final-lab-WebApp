@@ -4,7 +4,7 @@
         Have an account? &nbsp;
         <PersonalRouter :route="route" :buttonText="buttonText" />
     </div>
-    <form @submit.prevent="handleSignUpEx()">
+    <form @submit.prevent="handleSignUp">
         <div>
             <p>Please fill in this form to create an account.</p>
             <hr />
@@ -55,7 +55,7 @@
                 />
             </div>
             <div>
-                <button type="submit">SignUp</button>
+                <button type="submit">Sign up</button>
             </div>
         </div>
     </form>
@@ -105,21 +105,13 @@ const passwordInputType = computed(() =>
 const redirect = useRouter();
 
 // Arrow function to SignUp user to supaBase with a timeOut() method for showing the error
-async function handleSignUpEx() {
-    const { user, error } = await supabase.auth.signUp({
-        email: email.value,
-        password: password.value,
-    });
-    console.log(email.value);
-}
-
 const handleSignUp = async () => {
     try {
         // calls the user store and send the users info to backend to logIn
         await user.signUp(email.value, password.value);
-
+        console.log(email.value);
         // redirects user to the homeView??? /* path = > LOGIN????  */
-        redirect.push({ path: "/" });
+        redirect.push({ path: "/auth/login" });
     } catch (error) {
         // displays error message
         errorMsg.value = `Error: ${error.message}`;
