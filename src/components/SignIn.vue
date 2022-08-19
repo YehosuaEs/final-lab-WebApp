@@ -4,43 +4,46 @@
         Don’t have an account? &nbsp;
         <PersonalRouter :route="route" :buttonText="buttonText" />
     </div>
-    <form @submit.prevent="handleSignIn()">
-        <p>Fill in this form to login into your account.</p>
+    <form @submit.prevent="handleSignIn">
+        <div>
+            <p>Fill in this form to login into your account.</p>
+            <hr />
 
-        <div>
-            <label for="email"><b>Email</b></label>
-        </div>
-        <div>
-            <input
-                type="text"
-                name="email"
-                id="email"
-                v-model="email"
-                placeholder="Enter your Email"
-            />
-        </div>
+            <div>
+                <label for="email"><b>Email</b></label>
+            </div>
+            <div>
+                <input
+                    type="text"
+                    name="email"
+                    id="email"
+                    v-model="email"
+                    placeholder="Enter your Email"
+                />
+            </div>
 
-        <div>
-            <label for="password"><b>Password</b></label>
-        </div>
-        <div>
-            <input
-                :type="passwordInputType"
-                name="password"
-                id="password"
-                v-model="password"
-                placeholder="Enter your Password"
-            />
-            <i
-                :class="passwordIconClick"
-                @click="hidePassword = !hidePassword"
-                class="material-icons iconEye"
-            >
-                {{ icon }}
-            </i>
-        </div>
-        <div>
-            <button type="submit">SignUp</button>
+            <div>
+                <label for="password"><b>Password</b></label>
+            </div>
+            <div>
+                <input
+                    :type="passwordInputType"
+                    name="password"
+                    id="password"
+                    v-model="password"
+                    placeholder="Enter your Password"
+                />
+                <i
+                    :class="passwordIconClick"
+                    @click="hidePassword = !hidePassword"
+                    class="material-icons iconEye"
+                >
+                    {{ icon }}
+                </i>
+            </div>
+            <div>
+                <button type="submit">Log in</button>
+            </div>
         </div>
     </form>
 </template>
@@ -56,6 +59,9 @@ import { storeToRefs } from "pinia";
 // Route Variables
 const route = "/auth/sign-up";
 const buttonText = "Sign Up";
+
+// Access to the constants store
+const user = useUserStore();
 
 // Input Fields
 const email = ref("");
@@ -87,7 +93,7 @@ const redirect = useRouter();
 const handleSignIn = async () => {
     try {
         // calls the user store and send the users info to backend to logIn
-        await useUserStore().signIn(email.value, password.value);
+        await user.signIn(email.value, password.value);
         // redirects user to the homeView
         redirect.push({ path: "/" });
     } catch (error) {

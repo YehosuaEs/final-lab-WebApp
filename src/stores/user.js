@@ -10,7 +10,7 @@ export const useUserStore = defineStore("user", {
       const user = await supabase.auth.user();
       this.user = user;
     },
-    // Registra un nuevo usuario y envía un email para la activación
+    // to Signup a new user and send an email verification.
     async signUp(email, password) {
       const { user, error } = await supabase.auth.signUp({
         email: email,
@@ -22,7 +22,7 @@ export const useUserStore = defineStore("user", {
         console.log(this.user);
       }
     },
-    // Logea al usuario.
+    // Login the user 
     async signIn(email, password) {
       const { user, error } = await supabase.auth.signIn({
         email: email,
@@ -34,8 +34,34 @@ export const useUserStore = defineStore("user", {
         console.log(this.user);
       }
     },
+    // Logout the user
+    async signOut() {
+      console.log("Saliendo");
+      try {
+        const { error } = await supabase.auth.signOut();
+        if (error) {
+          alert("Ha ocurrido un error al salir de la sesión");
+          console.error("Error", error);
+          return;
+        }
+        alert("¡Has salido de la sesión!");
+      } catch (error) {
+        alert("Error desconocido al salir de la sesión");
+        console.error("Error", error);
+      }
+    },
   },
 
+
+  persist: {
+    enabled: true,
+    strategies: [
+      {
+        key: "user",
+        storage: localStorage,
+      },
+    ],
+  },
   /* -----------------------------------------------------*/
   // async handleSignup(credentials: Credentials) {
   //   try {
