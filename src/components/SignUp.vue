@@ -8,7 +8,7 @@
         <div>
             <p>Please fill in this form to create an account.</p>
             <hr />
-
+            <!-- ------- email ------- -->
             <div>
                 <label for="email"><b>Email</b></label>
             </div>
@@ -21,7 +21,7 @@
                     placeholder="Enter your Email"
                 />
             </div>
-
+            <!-- ------- password ------- -->
             <div>
                 <label for="password"><b>Password</b></label>
             </div>
@@ -41,6 +41,7 @@
                     {{ icon }}
                 </i>
             </div>
+            <!-- ------- repeat password ------- -->
 
             <div>
                 <label for="passwordRepeat"><b>Repeat Password</b></label>
@@ -54,6 +55,7 @@
                     placeholder="Confirm your Password"
                 />
             </div>
+            <!-- ------- button submit ------- -->
             <div>
                 <button type="submit">Sign up</button>
             </div>
@@ -67,51 +69,68 @@ import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "../stores/user";
 
-/* -- Pruebas-- */
-import { supabase } from "../supabase";
-
 // Route Variables as Props
 const route = "/auth/login";
 const buttonText = "Log in";
-
-// Access to the constants store
+/* -----------------------------VARIABLES---------------------------- */
+// Access to the constants in the Store
 const user = useUserStore();
-
+// Router to push user once handleSignUp to Signin component
+const redirect = useRouter();
 // Input Fields
 const email = ref("");
 const password = ref("");
 const repeatPassword = ref("");
-
 // Icons Show and hide password & const to manage
 const hidePassword = ref(true);
 const icon = ref("visibility_off");
-
 // Error Message
 const errorMsg = ref("");
+// To confirm password
 
-// Show hide password variable
-// Show hide confirmPassword variable
+/* -----------------------METHODS and FUNCTIONS----------------------- */
+// To verify correct email
+const checkEmail = (email) => {
+    const validEmail =
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return validEmail.test(email);
+};
+// To verify correct password
+const checkPassword = (password) => {
+    const strongPassword =
+        /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,20}$/;
+    return strongPassword.test(password);
+};
+// To hide and show password
 const passwordIconClick = computed(() =>
     hidePassword.value
         ? (icon.value = "visibility")
         : (icon.value = "visibility_off")
 );
-const clickEye = () => {};
 const passwordInputType = computed(() =>
     hidePassword.value ? "password" : "text"
 );
 
-// Router to push user once SignedUp to Log In (once you are signup know login)
-const redirect = useRouter();
-
 // Arrow function to SignUp user to supaBase with a timeOut() method for showing the error
 const handleSignUp = async () => {
     try {
-        // calls the user store and send the users info to backend to logIn
-        await user.signUp(email.value, password.value);
-        console.log(email.value);
-        // redirects user to the homeView??? /* path = > LOGIN????  */
-        redirect.push({ path: "/auth/login" });
+        if (!email.value || !password.value) {
+            alert("missing infoo");
+        } else if (!checkEmail(email.value)) {
+            alert("Valid email required.");
+        } else if (password.value !== repeatPassword.value) {
+            alert("the password doesn't match");
+        } else if (!checkPassword(password.value)) {
+            alert(
+                "Passwords must contain at least six characters, including uppercase, lowercase, numbers and a special character"
+            );
+        } else {
+            // calls the user from store and send the users info to backend to login
+            await user.signUp(email.value, password.value);
+            console.log(email.value + " si entraste  con tu email well done");
+            // redirect.push({ path: "/auth/login" });
+            redirect.push({ path: "/auth/sign-up" });
+        }
     } catch (error) {
         // displays error message
         errorMsg.value = `Error: ${error.message}`;
