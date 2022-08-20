@@ -1,66 +1,79 @@
 <template>
-    <div>Sign Up</div>
-    <div>
-        Have an account? &nbsp;
-        <PersonalRouter :route="route" :buttonText="buttonText" />
-    </div>
-    <form @submit.prevent="handleSignUp">
-        <div>
-            <p>Please fill in this form to create an account.</p>
-            <hr />
-            <!-- ------- email ------- -->
-            <div>
-                <label for="email"><b>Email</b></label>
+    <section>
+        <div class="container">
+            <div class="titleContainer">
+                <h1>Listito</h1>
+                <p>Your todo list app</p>
             </div>
-            <div>
-                <input
-                    type="text"
-                    name="email"
-                    id="email"
-                    v-model="email"
-                    placeholder="Enter your Email"
-                />
+            <div class="subtitleContainer">
+                <h3>Welcome <br /></h3>
+                <p>Signup to get start</p>
             </div>
-            <!-- ------- password ------- -->
-            <div>
-                <label for="password"><b>Password</b></label>
-            </div>
-            <div>
-                <input
-                    :type="passwordInputType"
-                    name="password"
-                    id="password"
-                    v-model="password"
-                    placeholder="Enter your Password"
-                />
-                <i
-                    :class="passwordIconClick"
-                    @click="hidePassword = !hidePassword"
-                    class="material-icons iconEye"
-                >
-                    {{ icon }}
-                </i>
-            </div>
-            <!-- ------- repeat password ------- -->
+            <!-- <div > -->
+            <form @submit.prevent="handleSignUp">
+                <div class="formContainer">
+                    <!-- ------- email ------- -->
+                    <div>
+                        <label for="email"><b>Email</b></label>
+                    </div>
+                    <div>
+                        <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            v-model="email"
+                            placeholder="Enter your Email"
+                        />
+                    </div>
+                    <!-- ------- password ------- -->
+                    <div>
+                        <label for="password"><b>Password</b></label>
+                    </div>
+                    <div>
+                        <input
+                            :type="passwordInputType"
+                            name="password"
+                            id="password"
+                            v-model="password"
+                            placeholder="Enter your Password"
+                        />
+                        <i
+                            :class="passwordIconClick"
+                            @click="hidePassword = !hidePassword"
+                            class="material-icons iconEye"
+                        >
+                            {{ icon }}
+                        </i>
+                    </div>
+                    <!-- ------- repeat password ------- -->
 
-            <div>
-                <label for="passwordRepeat"><b>Repeat Password</b></label>
+                    <div>
+                        <label for="passwordRepeat"
+                            ><b>Repeat Password</b></label
+                        >
+                    </div>
+                    <div>
+                        <input
+                            type="password"
+                            name="repeatPassword"
+                            id="repeatPassword"
+                            v-model="repeatPassword"
+                            placeholder="Confirm your Password"
+                        />
+                    </div>
+                    <!-- ------- button submit ------- -->
+                    <div>
+                        <button type="submit">Sign up</button>
+                    </div>
+                </div>
+            </form>
+            <div class="haveSign">
+                Have an account? &nbsp;
+                <PersonalRouter :route="route" :buttonText="buttonText" />
             </div>
-            <div>
-                <input
-                    type="password"
-                    name="repeatPassword"
-                    id="repeatPassword"
-                    v-model="repeatPassword"
-                    placeholder="Confirm your Password"
-                />
-            </div>
-            <!-- ------- button submit ------- -->
-            <div>
-                <button type="submit">Sign up</button>
-            </div>
+            <!-- </div> -->
         </div>
-    </form>
+    </section>
 </template>
 
 <script setup>
@@ -143,17 +156,43 @@ const handleSignUp = async () => {
 </script>
 
 <style scoped>
+section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container {
+    border: 1px solid red;
+    width: 100%;
+    padding: 0rem 2rem;
+}
+.titleContainer {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.subtitleContainer {
+    color: green;
+    margin-bottom: 20px;
+}
+.containerForm {
+    /* margin-top: 60px; */
+}
 .iconEye {
     cursor: pointer;
 }
 
 form {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     margin: 1rem 0;
+    justify-content: center;
+    align-items: center; */
 }
 input {
     margin-bottom: 1rem;
+    width: 100%;
 }
 button {
     background-color: #4caf50;
@@ -162,8 +201,11 @@ button {
     padding: 10px 10px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
     font-size: 16px;
     cursor: pointer;
+}
+
+.haveSign {
+    margin-bottom: 30px;
 }
 </style>
