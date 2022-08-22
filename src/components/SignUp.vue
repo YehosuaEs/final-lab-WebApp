@@ -8,17 +8,16 @@
             <div class="subtitleContainer">
                 <h4>Hello!</h4>
                 <h4>Signup to get started</h4>
+                <p class="errormsg">{{ errorMsg }}</p>
             </div>
             <!-- <div > -->
             <form @submit.prevent="handleSignUp">
                 <div class="formContainer">
                     <!-- ------- email ------- -->
-                    <div>
-                        <label for="email"
+                    <div class="inputContainer">
+                        <label for="email" class="label"
                             ><p><!-- Email --></p></label
                         >
-                    </div>
-                    <div>
                         <input
                             type="text"
                             name="email"
@@ -32,14 +31,15 @@
                                     : 'input'
                             "
                         />
+                        <p class="errormsg">
+                            {{ emailErrorMsg }}
+                        </p>
                     </div>
                     <!-- ------- password ------- -->
-                    <div>
+                    <div class="passwordInput inputContainer">
                         <label for="password"
                             ><p><!-- Password --></p></label
                         >
-                    </div>
-                    <div class="passwordInput">
                         <input
                             :type="passwordInputType"
                             name="password"
@@ -60,15 +60,13 @@
                         >
                             {{ icon }}
                         </i>
+                        <p class="errormsg">{{ passwordErrorMsg }}</p>
                     </div>
                     <!-- ------- repeat password ------- -->
-
-                    <div>
+                    <div class="inputContainer">
                         <label for="passwordRepeat"
                             ><p><!-- Repeat Password --></p></label
                         >
-                    </div>
-                    <div>
                         <input
                             type="password"
                             name="repeatPassword"
@@ -124,13 +122,6 @@ const repeatPassword = ref("");
 // Icons Show and hide password & const to manage
 const hidePassword = ref(true);
 const icon = ref("visibility_off");
-// Error Message
-const errorMsg = ref("");
-// Error Input
-const errorNoValue = ref(false);
-const errorCheckEmail = ref(false);
-const errorPasswordSame = ref(false);
-const errorCheckPassword = ref(false);
 
 /* -----------------------METHODS and FUNCTIONS----------------------- */
 // To verify correct email
@@ -155,33 +146,46 @@ const passwordInputType = computed(() =>
     hidePassword.value ? "password" : "text"
 );
 
+// Error Message
+const errorMsg = ref("");
+const emailErrorMsg = ref("");
+const passwordErrorMsg = ref("");
+// Error Input
+const errorNoValue = ref(false);
+const errorCheckEmail = ref(false);
+const errorPasswordSame = ref(false);
+const errorCheckPassword = ref(false);
 // Arrow function to SignUp user to supaBase with a timeOut() method for showing the error
 const handleSignUp = async () => {
     try {
         if (!email.value || !password.value) {
-            alert("missing info");
-            errorNoValue.value = true;
+            errorMsg.value = "Missing info, please chack!";
+            // errorNoValue.value = true;
+            // setTimeout(function () {
+            //     errorMsg.value = "";
+            // }, 4000);
         } else if (!checkEmail(email.value)) {
-            alert("Valid email required.");
-            errorNoValue.value = false;
+            // errorNoValue.value = false;
             errorCheckEmail.value = true;
+            errorMsg.value = null;
+            emailErrorMsg.value = "Valid email required.";
         } else if (password.value !== repeatPassword.value) {
-            alert("the password doesn't match");
             errorCheckEmail.value = false;
             errorPasswordSame.value = true;
+            emailErrorMsg.value = "";
+            passwordErrorMsg.value = "The password doesn't match";
         } else if (!checkPassword(password.value)) {
-            alert(
-                "Passwords must contain at least six characters, including uppercase, lowercase, numbers and a special character"
-            );
             errorPasswordSame.value = false;
             errorCheckPassword.value = true;
+            passwordErrorMsg.value =
+                "Passwords must contain at least six characters, including uppercase, lowercase, numbers and special character";
         } else {
             // calls the user from store and send the users info to backend to login
             await user.signUp(email.value, password.value);
             errorCheckPassword.value = false;
-            console.log(email.value + " si entraste  con tu email well done");
-            // redirect.push({ path: "/auth/login" });
-            redirect.push({ path: "/auth/sign-up" });
+            passwordErrorMsg.value = null;
+            redirect.push({ path: "/auth/login" });
+            // redirect.push({ path: "/auth/sign-up" });
         }
     } catch (error) {
         // displays error message
@@ -216,17 +220,26 @@ section {
     margin-bottom: 26px;
 }
 
-.formContainer {
+.inputContainer {
+    position: relative;
+    margin-bottom: 1.25rem;
 }
 
 .input {
     width: 100%;
-    margin-bottom: 1.25rem;
-    padding: 1rem 0.5rem;
-    border: 1px solid #dadee2;
+    /* margin-bottom: 1.25rem; */
+    padding: 1rem 0.7rem;
+    border: 1.5px solid #fff;
     border-radius: 10px;
     box-shadow: 0px 3px 15px -4px #dadee2, 0px 2px 10px -4px #dadee2;
     letter-spacing: 0.5px;
+    transition: 0.5s;
+    /* outline: 1.5px solid #dadee2; */
+}
+
+.input:focus {
+    outline: none;
+    border: 1.5px solid #f2a74b;
 }
 
 .errorInput {
@@ -234,19 +247,23 @@ section {
     box-shadow: 0px 2px 13px -10px #f24452;
 }
 
-input:focus {
-    outline: none;
-    border: 1.5px solid #f2a74b;
+.errormsg {
+    color: #f24452;
+    font-size: 14px;
+    margin-left: 0.7rem;
 }
+
 .passwordInput {
     position: relative;
 }
+
 .iconEye {
     cursor: pointer;
-    color: #707070;
+    color: #757575;
     position: absolute;
     top: 15px;
     right: 20px;
+    font-size: 22px;
 }
 
 button {
@@ -262,6 +279,7 @@ button {
     font-size: 16px;
     cursor: pointer;
     width: 100%;
+    transition: 0.8s;
 }
 button:hover {
     background-color: #fff;
@@ -275,5 +293,8 @@ button:hover {
 }
 .haveSign_text {
     color: #f2a74b;
+}
+.haveSign_text:hover {
+    background: none;
 }
 </style>

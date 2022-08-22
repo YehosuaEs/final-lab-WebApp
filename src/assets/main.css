@@ -6,7 +6,8 @@
 }
 #app {
     font-family: "Roboto", sans-serif;
-    color: #2e2e2e;
+    /* color: #2e2e2e; */
+    color: #606060;
 }
 h1 {
     font-size: 43px;
