@@ -13,7 +13,9 @@
             <form @submit.prevent="handleSignIn">
                 <div class="formContainer">
                     <div>
-                        <label for="email"><p>Email</p></label>
+                        <label for="email"
+                            ><p><!-- Email --></p></label
+                        >
                     </div>
                     <div>
                         <input
@@ -27,7 +29,9 @@
                     </div>
 
                     <div>
-                        <label for="password"><p>Password</p></label>
+                        <label for="password"
+                            ><p><!-- Password --></p></label
+                        >
                     </div>
                     <div class="passwordInput">
                         <input
@@ -106,6 +110,9 @@ const redirect = useRouter();
 // Arrow function to Signin user to supaBase
 const handleSignIn = async () => {
     try {
+        if ((await user.signIn(email.value)) === email.value) {
+            alert("this email doesnt exist");
+        }
         // calls the user store and send the users info to backend to logIn
         await user.signIn(email.value, password.value);
         // redirects user to the homeView
@@ -147,10 +154,16 @@ section {
     width: 100%;
     margin-bottom: 1.25rem;
     padding: 1rem 0.5rem;
-    border: 1px solid #dadee2;
+    border: 1.5px solid #fff;
     border-radius: 10px;
     box-shadow: 0px 3px 15px -4px #dadee2, 0px 2px 10px -4px #dadee2;
     letter-spacing: 0.5px;
+    transition: 0.5s;
+}
+
+input:focus {
+    outline: none;
+    border: 1.5px solid #034c8c;
 }
 
 .errorInput {
@@ -158,19 +171,17 @@ section {
     box-shadow: 0px 2px 13px -10px #f24452;
 }
 
-input:focus {
-    outline: none;
-    border: 1.5px solid #034c8c;
-}
 .passwordInput {
     position: relative;
 }
+
 .iconEye {
     cursor: pointer;
-    color: #707070;
+    color: #757575;
     position: absolute;
     top: 15px;
     right: 20px;
+    font-size: 22px;
 }
 
 button {
@@ -186,6 +197,8 @@ button {
     font-size: 16px;
     cursor: pointer;
     width: 100%;
+    text-transform: uppercase;
+    transition: 0.8s;
 }
 button:hover {
     background-color: #fff;
@@ -199,5 +212,8 @@ button:hover {
 }
 .haveSign_text {
     color: #034c8c;
+}
+.haveSign_text:hover {
+    background: none;
 }
 </style>

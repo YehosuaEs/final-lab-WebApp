@@ -10,7 +10,7 @@ export const useUserStore = defineStore("user", {
       const user = await supabase.auth.user();
       this.user = user;
     },
-    // to Signup a new user and send an email verification.
+    // Signup a new user and send an email verification.
     async signUp(email, password) {
       const { user, error } = await supabase.auth.signUp({
         email: email,
@@ -20,6 +20,7 @@ export const useUserStore = defineStore("user", {
       if (user) {
         this.user = user;
         console.log(this.user);
+        alert("Registro comprobado, se enviará un email para la activación");
       }
     },
     // Login the user 
