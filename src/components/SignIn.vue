@@ -116,8 +116,8 @@ const handleSignIn = async () => {
         // calls the user store and send the users info to backend to logIn
         await user.signIn(email.value, password.value);
         // redirects user to the homeView
-        // redirect.push({ path: "/" });
-        redirect.push({ path: "/auth/login" });
+        redirect.push({ path: "/" });
+        // redirect.push({ path: "/auth/login" });
     } catch (error) {
         // displays error message
         errorMsg.value = `Error: ${error.message}`;
@@ -158,10 +158,15 @@ section {
     border-radius: 10px;
     box-shadow: 0px 3px 15px -4px #dadee2, 0px 2px 10px -4px #dadee2;
     letter-spacing: 0.5px;
-    transition: 0.5s;
+    transition: 0.4s;
+}
+/* To prevent the color-bg when autofill */
+.input:-webkit-autofill,
+.input:-webkit-autofill:active {
+    transition: background-color 1000s ease-out;
 }
 
-input:focus {
+.input:focus {
     outline: none;
     border: 1.5px solid #034c8c;
 }
@@ -198,7 +203,7 @@ button {
     cursor: pointer;
     width: 100%;
     text-transform: uppercase;
-    transition: 0.8s;
+    transition: 0.5s;
 }
 button:hover {
     background-color: #fff;
