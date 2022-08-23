@@ -10,7 +10,7 @@
             :task="item"
             @emitDelete-task="deleteTask"
             @emitEdit-task="editTask"
-            @emitCheck-task=""
+            @emitCheck-task="checkTask"
         />
     </div>
 
@@ -49,8 +49,9 @@ async function addTaskTodo(task) {
 computed(getAllTasks());
 
 /* 7.1 */
-async function checkTask(id) {
-    await taskStore.checkTaskItem(id);
+async function checkTask(id, check) {
+    await taskStore.checkTaskItem(id, check);
+    getAllTasks();
 }
 /* 7.2 DONE */
 async function deleteTask(id) {

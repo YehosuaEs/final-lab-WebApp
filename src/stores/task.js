@@ -32,10 +32,10 @@ export const useTaskStore = defineStore("tasks", {
       ]);
     },
     // To check complete or not task   NOT WORKIG STILL
-    async checkTaskItem(id) {
+    async checkTaskItem(id, check) {
       const { data, error } = await supabase
         .from("tasks")
-        .update({ is_complete: true })
+        .update({ is_complete: check })
         .match({ id: id });
     },
     // To Delete Tasks

@@ -32,6 +32,7 @@
             />
             <button type="submit">Edit</button>
         </form>
+        {{ check }}
     </div>
 </template>
 
@@ -48,6 +49,7 @@ const task = ref({});
 const thereIsFotm = ref(false);
 const editTitle = ref("");
 const editDescription = ref("");
+const check = ref(false);
 
 const props = defineProps({
     task: { type: Object },
@@ -58,12 +60,13 @@ const props = defineProps({
 // 6 To check the task by id--->missing the prop to conect the parent NOT DONE
 const checkTaskId = (id) => {
     const taskId = id;
-    emit("emitCheck-task", taskId);
-    console.log("hola");
+    check.value = !check.value;
+    emit("emitCheck-task", taskId, check.value);
 };
 // 7 To edit task by id
 const editTaskId = (id) => {
-    emit("emitEdit-task", id, editTitle.value, editDescription.value);
+    const taskId = id;
+    emit("emitEdit-task", taskId, editTitle.value, editDescription.value);
     console.log("hola");
     thereIsFotm.value = false;
     editTitle.value = "";
