@@ -1,20 +1,21 @@
 <template>
     <Nav />
-    <hr />
-    <div>hello you are in the Home View</div>
-    <NewTask @emitNew-task="addTaskTodo" />
-    <hr />
 
-    <div v-for="(item, id) in allTasks" :key="id">
-        <TaskItem
-            :task="item"
-            @emitDelete-task="deleteTask"
-            @emitEdit-task="editTask"
-            @emitCheck-task="checkTask"
-        />
+    <div class="container">
+        <div>
+            <NewTask @emitNew-task="addTaskTodo" />
+        </div>
+        <div class="tasks">
+            <div v-for="(item, id) in allTasks" :key="id">
+                <TaskItem
+                    :task="item"
+                    @emitDelete-task="deleteTask"
+                    @emitEdit-task="editTask"
+                    @emitCheck-task="checkTask"
+                />
+            </div>
+        </div>
     </div>
-
-    <hr />
     <Footer />
     <!-- <button @click="getAllTasks">CLICK</button> -->
 </template>
@@ -77,4 +78,10 @@ async function editTask(id, title, description) {
 // 7.2-customEvent will fire an asynf function that will take in 1 param/argument. This async function's body will be used to call the deleteTaskmethod which will take the param/argument's id in order to delete the task. This function needs to call the function mentioned on hint4.
 </script>
 
-<style></style>
+<style scoped>
+.container {
+    min-height: calc(100vh - 86px);
+    min-height: -webkit-calc(100vh - 86px);
+    min-height: -moz-calc(100vh - 86px);
+}
+</style>
