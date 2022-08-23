@@ -20,15 +20,21 @@ export const useUserStore = defineStore("user", {
       if (user) {
         this.user = user;
         console.log(this.user);
-        alert("Registro comprobado, se enviará un email para la activación");
+        // alert("Registro comprobado, se enviará un email para la activación");
       }
     },
     // Login the user 
     async signIn(email, password) {
-      const { user, error } = await supabase.auth.signIn({
-        email: email,
-        password: password,
-      });
+      const { user, error } = await supabase.auth.signIn(
+        {
+          email: email,
+          password: password,
+        },
+        {
+          /* to dont send magic session */
+          shouldCreateUser: false,
+        }
+      );
       if (error) throw error;
       if (user) {
         this.user = user;

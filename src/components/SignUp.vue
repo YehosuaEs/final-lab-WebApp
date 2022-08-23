@@ -26,7 +26,7 @@
                             placeholder="Enter your Email"
                             class="input"
                             :class="
-                                errorValue || errorCheckEmail
+                                errorNoValue || errorCheckEmail
                                     ? 'errorInput'
                                     : 'input'
                             "
@@ -87,6 +87,7 @@
                     </div>
                 </div>
             </form>
+
             <div class="haveSign">
                 Already have an account?
                 <PersonalRouter
@@ -105,7 +106,7 @@ import PersonalRouter from "./PersonalRouter.vue";
 import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "../stores/user";
-
+import AlertMessage from "./AlertMessage.vue";
 // Route Variables as Props
 const route = "/auth/login";
 const buttonText = "Log in";
@@ -155,19 +156,20 @@ const errorNoValue = ref(false);
 const errorCheckEmail = ref(false);
 const errorPasswordSame = ref(false);
 const errorCheckPassword = ref(false);
+const formConfirm = ref(true);
 // Arrow function to SignUp user to supaBase with a timeOut() method for showing the error
 const handleSignUp = async () => {
     try {
         if (!email.value || !password.value) {
             errorMsg.value = "Missing info, please chack!";
-            // errorNoValue.value = true;
-            // setTimeout(function () {
-            //     errorMsg.value = "";
-            // }, 4000);
+            errorNoValue.value = true;
+            setTimeout(function () {
+                errorMsg.value = "";
+            }, 4000);
         } else if (!checkEmail(email.value)) {
-            // errorNoValue.value = false;
+            errorNoValue.value = false;
             errorCheckEmail.value = true;
-            errorMsg.value = null;
+            errorMsg.value = "";
             emailErrorMsg.value = "Valid email required.";
         } else if (password.value !== repeatPassword.value) {
             errorCheckEmail.value = false;
@@ -182,8 +184,13 @@ const handleSignUp = async () => {
         } else {
             // calls the user from store and send the users info to backend to login
             await user.signUp(email.value, password.value);
+            formConfirm.value = false;
             errorCheckPassword.value = false;
             passwordErrorMsg.value = null;
+            alert(
+                email.value +
+                    " Check you email and confirm to start join Listito"
+            );
             redirect.push({ path: "/auth/login" });
             // redirect.push({ path: "/auth/sign-up" });
         }
@@ -213,7 +220,7 @@ section {
 }
 .titleContainer {
     text-align: center;
-    margin-bottom: 80px;
+    margin-bottom: 25px;
 }
 
 .subtitleContainer {
@@ -233,8 +240,13 @@ section {
     border-radius: 10px;
     box-shadow: 0px 3px 15px -4px #dadee2, 0px 2px 10px -4px #dadee2;
     letter-spacing: 0.5px;
-    transition: 0.5s;
+    transition: 0.4s;
     /* outline: 1.5px solid #dadee2; */
+}
+/* To prevent the color-bg when autofill */
+.input:-webkit-autofill,
+.input:-webkit-autofill:active {
+    transition: background-color 1000s ease-out;
 }
 
 .input:focus {
@@ -279,7 +291,7 @@ button {
     font-size: 16px;
     cursor: pointer;
     width: 100%;
-    transition: 0.8s;
+    transition: 0.5s;
 }
 button:hover {
     background-color: #fff;
