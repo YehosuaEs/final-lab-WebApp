@@ -6,19 +6,20 @@
         <p>{{ props.task.description }}</p>
         <!-- ABout to CHECK or NOT CHECK -->
         <span
+            :class="handlerIconType"
             class="material-symbols-outlined"
             @click="checkTaskId(props.task.id)"
         >
-            done
+            {{ iconDoneOrCircle }}
         </span>
-        <!-- <span class="material-symbols-outlined"> undo </span> -->
+        <!-- <span class="material-symbols-outlined circle"> circle </span> -->
         <!-- ABOUT EDIT FORM -->
-        <span class="material-symbols-outlined" @click="handleForm">
+        <span class="material-symbols-outlined edit" @click="handleForm">
             edit
         </span>
         <!-- ABOUT REMOVE ITEM FROM LIST -->
         <span
-            class="material-symbols-outlined"
+            class="material-symbols-outlined delete"
             @click="removeTaskId(props.task.id)"
         >
             delete
@@ -38,7 +39,7 @@
 
 <!-- ------------------------------------------------------------------------------- -->
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, computed } from "vue";
 const emit = defineEmits([
     "emitDelete-task",
     "emitCheck-task",
@@ -50,7 +51,7 @@ const thereIsFotm = ref(false);
 const editTitle = ref("");
 const editDescription = ref("");
 const check = ref(false);
-
+const iconDoneOrCircle = ref("");
 const props = defineProps({
     task: { type: Object },
     editTitle: { type: String },
@@ -81,11 +82,37 @@ const removeTaskId = (id) => {
     const taskId = id;
     emit("emitDelete-task", taskId);
 };
+
+// To show icon circle or done
+const handlerIconType = computed(() =>
+    check.value
+        ? (iconDoneOrCircle.value = "done")
+        : (iconDoneOrCircle.value = "circle")
+);
 </script>
 <!-- ------------------------------------------------------------------------------- -->
 <style scoped>
 span {
     cursor: pointer;
+}
+span:hover {
+    opacity: 0.9;
+}
+
+.circle {
+    color: #45bfb3;
+}
+
+.done {
+    color: #fff;
+    background-color: #45bfb3;
+    border-radius: 20px;
+}
+.edit {
+    color: #f2a74b;
+}
+.delete {
+    color: #f24452;
 }
 </style>
 

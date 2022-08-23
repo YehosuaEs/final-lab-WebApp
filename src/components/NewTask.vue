@@ -13,7 +13,7 @@
                 <div>
                     <input
                         type="text"
-                        placeholder="New Task Title"
+                        placeholder="e.g., Code every day with vue.js "
                         v-model="title"
                     />
                 </div>
