@@ -13,7 +13,7 @@
                 <div>
                     <input
                         type="text"
-                        placeholder="New Task Title"
+                        placeholder="e.g., Code every day with vue.js "
                         v-model="title"
                     />
                 </div>
@@ -60,7 +60,6 @@ const addNewTask = () => {
         };
         emit("emitNew-task", newTask);
         // this.$emit("emitNew-task", newTask);
-        // this.$emit("emitNew-task", title, description);
         title.value = "";
         description.value = "";
     }
