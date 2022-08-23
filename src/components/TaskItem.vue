@@ -102,6 +102,9 @@ span:hover {
 .circle {
     color: #45bfb3;
 }
+.circle:hover {
+    content: "\f023";
+}
 
 .done {
     color: #fff;
