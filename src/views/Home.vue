@@ -4,9 +4,12 @@
     <div>hello you are in the Home View</div>
     <NewTask @emitNew-task="addTaskTodo" />
     <hr />
-    <TaskItem />
 
-    <button @click="getAllTasks">CLICK</button>
+    <div v-for="(item, id) in allTasks" :key="id">
+        <TaskItem :task="item" />
+    </div>
+
+    <!-- <button @click="getAllTasks">CLICK</button> -->
 
     <hr />
     <Footer />
@@ -18,7 +21,7 @@ import Footer from "../components/Footer.vue";
 import NewTask from "../components/NewTask.vue";
 import TaskItem from "../components/TaskItem.vue";
 
-import { ref } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useUserStore } from "../stores/user";
 import { useTaskStore } from "../stores/task";
 // Access to the constants store
@@ -36,7 +39,11 @@ async function addTaskTodo(task) {
 async function getAllTasks() {
     allTasks.value = await taskStore.fetchTasks();
     console.log(allTasks.value);
+    console.log(allTasks.value[0].title);
 }
+// Computed  is use to get work the function and call it before fetched the info
+computed(getAllTasks());
+
 // 7. TaskItem component will loop through the tasks-array that will print an individual instance of an individual TaskItem component. TaskItem will receive 3 customEvents on this instance of the homeView. 1 customEvent for toggling the task to show either a text or an icon to display if the task is completed or not completed. 1 customEevent for removing/deleting the task out of the array. 1 customEvent for editing the task title and description. This function needs to call the function mentioned on hint4.
 // 7.1-customEvent will fire an async function that will take in 1 param/argument. On the body of this function the param/argument will be used to define 2 constants. 1 of this constants will take care of setting the boolean value to the opposite of the value that checks wether this task is_complete. 1 of this constants will take of calling the id of this specific task in order to call the right id.
 // 7.2-customEvent will fire an asynf function that will take in 1 param/argument. This async function's body will be used to call the deleteTaskmethod which will take the param/argument's id in order to delete the task. This function needs to call the function mentioned on hint4.

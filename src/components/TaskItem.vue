@@ -1,13 +1,22 @@
 <template>
-  <div>Task Item Component</div>
+    <!-- <div>Task Item Component</div> -->
+    <div>
+        <p>{{ props.task.id }}</p>
+        <p>{{ props.task.title }}</p>
+        <p>{{ props.task.description }}</p>
+    </div>
 </template>
 
 <script setup>
+import { ref } from "vue";
 // const emit = defineEmits([
 //   ENTER-EMITS-HERE
 // ])
+const task = ref({});
 
-// const props = defineProps(["ENTER-PROP-HERE"]);
+const props = defineProps({
+    task: { type: Object },
+});
 </script>
 
 <style></style>
