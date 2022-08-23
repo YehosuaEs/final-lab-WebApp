@@ -1,7 +1,11 @@
 <template>
-  <div>Footer Component</div>
+    <footer>Footer Component</footer>
 </template>
 
 <script setup></script>
 
-<style></style>
+<style scoped>
+footer {
+    background-color: thistle;
+}
+</style>

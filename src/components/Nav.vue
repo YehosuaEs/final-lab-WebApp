@@ -1,8 +1,8 @@
 <template>
-    <div>Nav Component</div>
-    <p class="name">{{ name }}</p>
-    <button @click="handleLogout">LogOut</button>
-    <button @click="handleFetchUser">Fetch User</button>
+    <header>
+        <p class="name">{{ name }}</p>
+        <button @click="handleLogout">LogOut</button>
+    </header>
 </template>
 
 <script setup>
@@ -47,6 +47,9 @@ const handleLogout = async () => {
 </script>
 
 <style scoped>
+header {
+    background-color: aquamarine;
+}
 .name {
     text-transform: capitalize;
 }

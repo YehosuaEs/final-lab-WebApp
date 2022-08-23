@@ -60,7 +60,6 @@ const addNewTask = () => {
         };
         emit("emitNew-task", newTask);
         // this.$emit("emitNew-task", newTask);
-        // this.$emit("emitNew-task", title, description);
         title.value = "";
         description.value = "";
     }
