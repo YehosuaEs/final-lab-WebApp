@@ -5,8 +5,12 @@ import { useUserStore } from "./user";
 export const useTaskStore = defineStore("tasks", {
   state: () => ({
     tasks: null,
+    // title: null,
+    // description: null,
   }),
+
   actions: {
+
     async fetchTasks() {
       const { data: tasks } = await supabase
         .from("tasks")
@@ -27,6 +31,13 @@ export const useTaskStore = defineStore("tasks", {
         },
       ]);
     },
+    // To check complete or not task   NOT WORKIG STILL
+    async checkTaskItem(id) {
+      const { data, error } = await supabase
+        .from("tasks")
+        .update({ is_complete: true })
+        .match({ id: id });
+    },
     // To Delete Tasks
     async deleteTaskItem(id) {
       const { data, error } = await supabase
@@ -34,5 +45,14 @@ export const useTaskStore = defineStore("tasks", {
         .delete()
         .match({ id: id })
     },
+    // To Edit the tasks
+    async editTaskItem(id, title, description) {
+      const { data, error } = await supabase
+        .from("tasks")
+        .update({ title: title, description: description })
+        .match({ id: id })
+    },
+
+
   },
 });
