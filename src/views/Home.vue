@@ -1,6 +1,6 @@
 <template>
     <Nav />
-
+    <Header />
     <div class="containerMain">
         <div>
             <NewTask @emitNew-task="addTaskTodo" />
@@ -21,6 +21,7 @@
 
 <script setup>
 import Nav from "../components/Nav.vue";
+import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
 import NewTask from "../components/NewTask.vue";
 import TaskItem from "../components/TaskItem.vue";
@@ -67,5 +68,8 @@ async function editTask(task) {
     /* min-height: -webkit-calc(68vh - 86px);
     min-height: -moz-calc(68vh - 86px); */
     background: #fff;
+}
+.tasks {
+    padding-bottom: 10px;
 }
 </style>

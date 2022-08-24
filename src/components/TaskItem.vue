@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="containerTaskItem">
         <!-- ABOUT TOGGLE TASK STATUS -->
         <div class="containerTask">
             <span
@@ -31,15 +31,25 @@
             </span>
         </div>
         <!-- --------FORM TO EDIT TASK------- -->
-        <form v-if="thereIsForm" @submit.prevent="editTask">
-            <div v-if="erroHandle">{{ error }}</div>
-            <input type="text" placeholder="edit Title" v-model="editTitle" />
+        <form
+            v-if="thereIsForm"
+            @submit.prevent="editTask"
+            class="containerFormEdit"
+        >
+            <div v-if="erroHandle" class="errormsg">{{ error }}</div>
+            <input
+                type="text"
+                placeholder="Edit Title"
+                v-model="editTitle"
+                class="inputEditTask"
+            />
             <input
                 type="text"
                 placeholder="Edit Description"
                 v-model="editDescription"
+                class="inputEditTask"
             />
-            <button type="submit">Edit</button>
+            <button type="submit">Save</button>
         </form>
     </div>
 </template>
@@ -83,8 +93,11 @@ const editTask = () => {
         emit("emitEdit-task", editValues);
         setTimeout(() => {
             thereIsForm.value = false;
-        }, 700);
+        }, 1000);
     }
+    setTimeout(() => {
+        error.value = "";
+    }, 4000);
 };
 
 // Just to handle the form dropdown o not with the value task in the inputs
@@ -100,13 +113,18 @@ const removeTask = () => {
 </script>
 <!-- ------------------------------------------STYLES------------------------------------------ -->
 <style scoped>
+.containerTaskItem {
+}
 .containerTask {
-    border: 1.5px solid #fff;
+    position: relative;
+    z-index: 1;
+    /* border: 1.5px solid rgb(192, 16, 16); */
     background: #fff;
     display: flex;
     align-items: center;
     margin: 20px 15px;
     padding: 10px;
+    border: none;
     border-radius: 20px;
     box-shadow: 0px 2px 15px -3px rgba(0, 0, 0, 0.1),
         0px -0px 10px -26px rgba(0, 0, 0, 0.1);
@@ -116,13 +134,17 @@ const removeTask = () => {
     width: 100%;
     margin: 10px;
 }
+
 .taskInfo > p {
     padding: 3px;
 }
 .taskInfo_title {
 }
+.taskInfo_title:first-letter {
+    text-transform: capitalize;
+}
 .taskInfo_description {
-    color: gray;
+    color: rgb(158, 158, 158);
 }
 
 span {
@@ -150,5 +172,70 @@ span:hover {
 }
 .delete {
     color: #f24452;
+}
+/* ----------------------- FORM TO EDIT TASK ----------------------- */
+
+.containerFormEdit {
+    position: relative;
+    background: #f7f7f7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: -50px 15px 20px 15px;
+    padding: 40px 10px 0px 10px;
+    border: none;
+    -webkit-border-bottom-right-radius: 20px;
+    -webkit-border-bottom-left-radius: 20px;
+    -moz-border-radius-bottomright: 20px;
+    -moz-border-radius-bottomleft: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.errormsg {
+    color: #f24452;
+    font-size: 14px;
+    margin-left: 0.7rem;
+}
+input {
+    width: 80vw;
+    margin: 5px 15px;
+    padding: 0.8rem 0.5rem;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 3px 15px -4px #dadee2, 0px 2px 10px -4px #dadee2;
+    letter-spacing: 0.5px;
+    transition: 0.4s;
+}
+/* to To prevent the color-bg when autofill */
+input:-webkit-autofill,
+input:-webkit-autofill:active {
+    transition: background-color 1000s ease-out;
+}
+
+input:focus {
+    outline: none;
+    border: 0.5px solid #fff;
+}
+button {
+    background: #f2a74b;
+    border: 2px solid #f2a74b;
+    color: #f6f7f8;
+    border-radius: 50px;
+    color: white;
+    margin: 1rem 0;
+    padding: 0.5rem 1.6rem;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.5s;
+    box-shadow: 0px 5px 15px -3px rgba(0, 0, 0, 0.1);
+    transition: 0.5s;
+}
+
+button:hover {
+    background-color: transparent;
+    border: 2px solid #f2a74b;
+    color: #f2a74b;
 }
 </style>
