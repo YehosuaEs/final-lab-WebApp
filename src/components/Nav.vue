@@ -3,9 +3,11 @@
         <p class="name">{{ name }}</p>
         <button @click="handleLogout">LogOut</button>
     </header>
+    <!-- <Burger /> -->
 </template>
 
 <script setup>
+import Burger from "./Burger.vue";
 import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "../stores/user";
@@ -48,7 +50,6 @@ const handleLogout = async () => {
 
 <style scoped>
 header {
-    background-color: aquamarine;
 }
 .name {
     text-transform: capitalize;

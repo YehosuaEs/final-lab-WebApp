@@ -19,7 +19,7 @@ export const useUserStore = defineStore("user", {
       if (error) throw error;
       if (user) {
         this.user = user;
-        console.log(this.user);
+        // console.log(this.user);
         // alert("Registro comprobado, se enviará un email para la activación");
       }
     },
@@ -58,7 +58,6 @@ export const useUserStore = defineStore("user", {
       }
     },
   },
-
 
   persist: {
     enabled: true,
