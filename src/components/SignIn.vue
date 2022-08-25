@@ -3,7 +3,7 @@
         <div class="container">
             <div class="titleContainer">
                 <div class="titleContainer_logo">
-                    <!-- <img src="../assets/LogoListito.png" alt="logo Listito" /> -->
+                    <img src="../assets/Listito.png" alt="logo Listito" />
                     <h1>Listito</h1>
                 </div>
                 <p>Your to-do list App</p>
