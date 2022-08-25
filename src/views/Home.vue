@@ -2,7 +2,12 @@
     <Nav />
     <Header />
     <div class="containerMain">
-        <div>
+        <img src="../assets/Humaaans.png" alt="human" />
+        <div class="button_continer">
+            <ButtonAddTask @click="handleAdd" />
+        </div>
+
+        <div v-if="toggleAdd" class="newTask">
             <NewTask @emitNew-task="addTaskTodo" />
         </div>
         <div class="tasks">
@@ -23,6 +28,7 @@
 import Nav from "../components/Nav.vue";
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
+import ButtonAddTask from "../components/ButtonAddTask.vue";
 import NewTask from "../components/NewTask.vue";
 import TaskItem from "../components/TaskItem.vue";
 
@@ -31,8 +37,10 @@ import { useUserStore } from "../stores/user";
 import { useTaskStore } from "../stores/task";
 // Access to the constants store
 const userStore = useUserStore();
-// Usando la tieda para sacar la info de las tareas
+// Using the store to get theinfo of the tasks
 const taskStore = useTaskStore();
+
+const toggleAdd = ref(false);
 
 onMounted(() => {
     taskStore.fetchTasks();
@@ -60,16 +68,42 @@ async function editTask(task) {
     await taskStore.editTaskItem(newTitle, newDescription, id);
     taskStore.fetchTasks();
 }
+const handleAdd = () => {
+    toggleAdd.value = !toggleAdd.value;
+};
 </script>
 
 <style scoped>
 .containerMain {
-    min-height: calc(100vh - 86px);
+    min-height: calc(80vh - 86px);
     /* min-height: -webkit-calc(68vh - 86px);
     min-height: -moz-calc(68vh - 86px); */
     background: #fff;
+    position: relative;
 }
+/* ---------------------------------- */
+.button_continer {
+    display: flex;
+    justify-content: end;
+    padding: 1.5rem 1.5rem 0;
+}
+
+/* ---------------------------------- */
+img {
+    display: none;
+    width: 500px;
+    position: absolute;
+    top: -50px;
+    left: -350px;
+}
+/* ---------------------------------- */
 .tasks {
     padding-bottom: 10px;
+}
+
+@media (min-width: 1366px) {
+    img {
+        display: block;
+    }
 }
 </style>

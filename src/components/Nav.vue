@@ -1,7 +1,7 @@
 <template>
     <div class="NavContainer">
         <div class="navBar_logo">
-            <img src="../assets/LogoListitoGS.png" alt="logo Listito" />
+            <img src="../assets/LogoListito.png" alt="logo Listito" />
         </div>
 
         <nav>

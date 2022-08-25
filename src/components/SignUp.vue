@@ -2,7 +2,10 @@
     <section>
         <div class="container">
             <div class="titleContainer">
-                <h1>Listito</h1>
+                <div class="titleContainer_logo">
+                    <img src="../assets/LogoListito.png" alt="logo Listito" />
+                    <h1>Listito</h1>
+                </div>
                 <p>Your to-do list App</p>
             </div>
             <div class="subtitleContainer">
@@ -214,13 +217,24 @@ section {
     align-items: center;
 }
 .container {
-    /* border: 1px solid red; */
     padding: 0rem 0rem;
     width: 280px;
 }
+
 .titleContainer {
     text-align: center;
     margin-bottom: 25px;
+}
+
+.titleContainer_logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    width: 20%;
+    margin-right: 15px;
 }
 
 .subtitleContainer {
@@ -234,15 +248,14 @@ section {
 
 .input {
     width: 100%;
-    /* margin-bottom: 1.25rem; */
     padding: 1rem 0.7rem;
     border: 1.5px solid #fff;
     border-radius: 10px;
     box-shadow: 0px 3px 15px -4px #dadee2, 0px 2px 10px -4px #dadee2;
     letter-spacing: 0.5px;
     transition: 0.4s;
-    /* outline: 1.5px solid #dadee2; */
 }
+
 /* To prevent the color-bg when autofill */
 .input:-webkit-autofill,
 .input:-webkit-autofill:active {

@@ -27,7 +27,7 @@ const name = userEmail.replace(/@.*$/, "");
     justify-content: center;
     align-items: center;
     letter-spacing: 0.2px;
-    padding: 20px 0 0;
+    padding: 20px 0 10px;
 }
 
 .greet {
