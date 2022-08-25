@@ -2,7 +2,10 @@
     <section>
         <div class="container">
             <div class="titleContainer">
-                <h1>Listito</h1>
+                <div class="titleContainer_logo">
+                    <img src="../assets/LogoListito.png" alt="logo Listito" />
+                    <h1>Listito</h1>
+                </div>
                 <p>Your to-do list App</p>
             </div>
             <div class="subtitleContainer">
@@ -110,9 +113,6 @@ const redirect = useRouter();
 // Arrow function to Signin user to supaBase
 const handleSignIn = async () => {
     try {
-        if ((await user.signIn(email.value)) === email.value) {
-            alert("this email doesnt exist");
-        }
         // calls the user store and send the users info to backend to logIn
         await user.signIn(email.value, password.value);
         // redirects user to the homeView
@@ -137,13 +137,25 @@ section {
     align-items: center;
 }
 .container {
-    /* border: 1px solid red; */
     padding: 0rem 0rem;
     width: 280px;
 }
 .titleContainer {
+    display: flex;
+    flex-direction: column;
     text-align: center;
     margin-bottom: 80px;
+}
+
+.titleContainer_logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    width: 20%;
+    margin-right: 15px;
 }
 
 .subtitleContainer {

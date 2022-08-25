@@ -113,17 +113,15 @@ const removeTask = () => {
 </script>
 <!-- ------------------------------------------STYLES------------------------------------------ -->
 <style scoped>
-.containerTaskItem {
-}
 .containerTask {
     position: relative;
     z-index: 1;
-    border: 0.1px solid #e9e9e9;
-    background: #fff;
     display: flex;
     align-items: center;
     margin: 20px 15px;
-    padding: 10px;
+    padding: 0px 10px;
+    border: 0.1px solid #e9e9e9;
+    background: #fff;
     border-radius: 20px;
     box-shadow: 0px 2px 15px -3px rgba(0, 0, 0, 0.1),
         0px -0px 10px -26px rgba(0, 0, 0, 0.1);
@@ -180,9 +178,9 @@ span:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: -50px 15px 20px 15px;
+    margin: -50px 16px 20px 16px;
     padding: 40px 10px 0px 10px;
-    border: none;
+    /* border: 1px solid #f7f7f7; */
     -webkit-border-bottom-right-radius: 20px;
     -webkit-border-bottom-left-radius: 20px;
     -moz-border-radius-bottomright: 20px;
@@ -196,7 +194,7 @@ span:hover {
     margin-left: 0.7rem;
 }
 input {
-    width: 80vw;
+    width: 75vw;
     margin: 5px 15px;
     padding: 0.8rem 0.5rem;
     border: none;
@@ -235,5 +233,15 @@ button:hover {
     background-color: transparent;
     border: 2px solid #f2a74b;
     color: #f2a74b;
+}
+@media (min-width: 1024px) {
+    input {
+        width: 65vw;
+    }
+}
+@media (min-width: 1366px) {
+    input {
+        width: 55vw;
+    }
 }
 </style>
