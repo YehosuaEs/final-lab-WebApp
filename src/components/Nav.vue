@@ -1,8 +1,7 @@
 <template>
-    <header>
-        <p class="name">{{ name }}</p>
+    <nav>
         <button @click="handleLogout">LogOut</button>
-    </header>
+    </nav>
     <!-- <Burger /> -->
 </template>
 
