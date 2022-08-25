@@ -74,7 +74,7 @@ const props = defineProps(["task"]);
 //     task: Array,
 // });
 
-// 6 To check the task by id--->missing the prop to conect the parent NOT DONE
+// 6 To check the task
 const toggleTaskStatus = () => {
     emit("emitCheck-task", props.task);
 };
@@ -180,7 +180,6 @@ span:hover {
     align-items: center;
     margin: -50px 16px 20px 16px;
     padding: 40px 10px 0px 10px;
-    /* border: 1px solid #f7f7f7; */
     -webkit-border-bottom-right-radius: 20px;
     -webkit-border-bottom-left-radius: 20px;
     -moz-border-radius-bottomright: 20px;
