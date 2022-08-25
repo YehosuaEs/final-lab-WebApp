@@ -195,12 +195,9 @@ const handleSignUp = async () => {
                     " Check you email and confirm to start join Listito"
             );
             redirect.push({ path: "/auth/login" });
-            // redirect.push({ path: "/auth/sign-up" });
         }
     } catch (error) {
-        // displays error message
         errorMsg.value = `Error: ${error.message}`;
-        // hides error message
         setTimeout(() => {
             errorMsg.value = null;
         }, 5000);

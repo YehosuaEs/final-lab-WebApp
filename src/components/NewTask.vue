@@ -62,7 +62,6 @@ const addNewTask = () => {
             description: description.value,
         };
         emit("emitNew-task", newTask);
-        // this.$emit("emitNew-task", newTask);
         title.value = "";
         description.value = "";
     }

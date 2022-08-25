@@ -25,7 +25,6 @@ const height = Math.max(
     document.documentElement.clientHeight,
     window.innerHeight || 0
 );
-// console.log(height);
 </script>
 
 <style scoped>
