@@ -281,7 +281,6 @@ section {
 button {
     background: #f2a74b;
     border: 2px solid #f2a74b;
-    color: #f6f7f8;
     border-radius: 50px;
     color: white;
     margin: 1rem 0;

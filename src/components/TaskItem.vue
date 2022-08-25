@@ -118,13 +118,12 @@ const removeTask = () => {
 .containerTask {
     position: relative;
     z-index: 1;
-    /* border: 1.5px solid rgb(192, 16, 16); */
+    border: 0.1px solid #e9e9e9;
     background: #fff;
     display: flex;
     align-items: center;
     margin: 20px 15px;
     padding: 10px;
-    border: none;
     border-radius: 20px;
     box-shadow: 0px 2px 15px -3px rgba(0, 0, 0, 0.1),
         0px -0px 10px -26px rgba(0, 0, 0, 0.1);
@@ -156,7 +155,7 @@ span:hover {
 }
 
 .circle {
-    color: #45bfb3;
+    color: #31ce85;
 }
 .circle:hover {
     content: "\e86c";
@@ -164,7 +163,7 @@ span:hover {
 
 .done {
     color: #fff;
-    background-color: #45bfb3;
+    background-color: #31ce85;
     border-radius: 20px;
 }
 .edit {
@@ -219,9 +218,8 @@ input:focus {
 button {
     background: #f2a74b;
     border: 2px solid #f2a74b;
-    color: #f6f7f8;
     border-radius: 50px;
-    color: white;
+    color: #fff;
     margin: 1rem 0;
     padding: 0.5rem 1.6rem;
     text-align: center;
