@@ -1,7 +1,13 @@
 <template>
-    <nav>
-        <button @click="handleLogout">LogOut</button>
-    </nav>
+    <div class="NavContainer">
+        <div class="navBar_logo">
+            <img src="../assets/LogoListitoGS.png" alt="logo Listito" />
+        </div>
+
+        <nav>
+            <button @click="handleLogout">logout</button>
+        </nav>
+    </div>
     <!-- <Burger /> -->
 </template>
 
@@ -48,9 +54,36 @@ const handleLogout = async () => {
 </script>
 
 <style scoped>
-header {
+.NavContainer {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 15px 15px;
+    box-shadow: 0px 0.1px 15px -3px rgba(215, 217, 219, 0.5);
 }
-.name {
-    text-transform: capitalize;
+img {
+    width: 20%;
+}
+button {
+    background: #fff;
+    border: 2px solid #034c8c;
+    color: #034c8c;
+    border-radius: 50px;
+    /* margin: 1rem 0 0.3rem 0; */
+    padding: 0.4rem 1.2rem;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.5s;
+    box-shadow: 0px 5px 15px -3px rgba(0, 0, 0, 0.1);
+}
+button:hover {
+    background-color: #034c8c;
+    border: 2px solid #034c8c;
+    color: #fff;
+    box-shadow: 0px 5px 15px -3px rgba(0, 0, 0, 0.1);
 }
 </style>

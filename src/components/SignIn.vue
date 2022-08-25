@@ -194,7 +194,6 @@ button {
     border: 2px solid #034c8c;
     color: #f6f7f8;
     border-radius: 50px;
-    color: white;
     margin: 1rem 0;
     padding: 1rem 1.25rem;
     text-align: center;

@@ -65,19 +65,22 @@ const addNewTask = () => {
     box-sizing: border-box;
 }
 .container {
-    border: none;
+    border: 0.5px solid #e9e9e9;
     margin: 20px 0;
     padding: 10px 10px 15px 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    border-bottom-right-radius: 30px;
-    border-bottom-left-radius: 30px;
+    /* border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
     -webkit-border-bottom-right-radius: 20px;
     -webkit-border-bottom-left-radius: 20px;
     -moz-border-radius-bottomright: 20px;
-    -moz-border-radius-bottomleft: 20px;
+    -moz-border-radius-bottomleft: 20px; */
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
     box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1),
         0px -24px 10px -26px rgba(0, 0, 0, 0.1);
 }
@@ -109,9 +112,8 @@ input:focus {
 .button {
     background: #f24452;
     border: 2px solid #f24452;
-    color: #f6f7f8;
     border-radius: 50px;
-    color: white;
+    color: #fff;
     margin: 1rem 0 0.3rem 0;
     padding: 0.5rem 1.6rem;
     text-align: center;

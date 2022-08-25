@@ -1,14 +1,14 @@
 <template>
-    <div>
+    <header class="headerContainer">
         <div class="greet">
-            <h4>Hello! &nbsp;</h4>
-            <h4 class="name">{{ name }}</h4>
+            <p>Hello!</p>
+            <p class="name">{{ name }}</p>
         </div>
-        <div class="greet">
-            <h5>Today's &nbsp;</h5>
-            <h5><Date /></h5>
+        <div class="date">
+            <p>Today's</p>
+            <p class="currentDate"><Date /></p>
         </div>
-    </div>
+    </header>
 </template>
 
 <script setup>
@@ -21,10 +21,35 @@ const name = userEmail.replace(/@.*$/, "");
 </script>
 
 <style scoped>
+.headerContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 0.2px;
+    padding: 20px 0 0;
+}
+
 .greet {
     display: flex;
 }
-.name {
+.greet > p {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.name::first-letter {
     text-transform: capitalize;
+}
+.date {
+    display: flex;
+    color: rgb(158, 158, 158);
+}
+.date > p {
+}
+
+.name,
+.currentDate {
+    margin-left: 5px;
 }
 </style>
