@@ -28,11 +28,7 @@
                             v-model="email"
                             placeholder="Enter your Email"
                             class="input"
-                            :class="
-                                errorNoValue || errorCheckEmail
-                                    ? 'errorInput'
-                                    : 'input'
-                            "
+                            :class="errorCheckEmail ? 'errorInput' : 'input'"
                         />
                         <p class="errormsg">
                             {{ emailErrorMsg }}
@@ -137,7 +133,7 @@ const checkEmail = (email) => {
 // To verify correct password
 const checkPassword = (password) => {
     const strongPassword =
-        /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,20}$/;
+        /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,50}$/;
     return strongPassword.test(password);
 };
 // To hide and show password
@@ -159,35 +155,46 @@ const errorNoValue = ref(false);
 const errorCheckEmail = ref(false);
 const errorPasswordSame = ref(false);
 const errorCheckPassword = ref(false);
-const formConfirm = ref(true);
+// const formConfirm = ref(true);
 // Arrow function to SignUp user to supaBase with a timeOut() method for showing the error
 const handleSignUp = async () => {
     try {
         if (!email.value || !password.value) {
             errorMsg.value = "Missing info, please chack!";
-            errorNoValue.value = true;
             setTimeout(function () {
                 errorMsg.value = "";
             }, 4000);
         } else if (!checkEmail(email.value)) {
             errorNoValue.value = false;
-            errorCheckEmail.value = true;
             errorMsg.value = "";
+            errorCheckEmail.value = true;
             emailErrorMsg.value = "Valid email required.";
+            setTimeout(function () {
+                errorCheckEmail.value = false;
+                emailErrorMsg.value = "";
+            }, 3000);
         } else if (password.value !== repeatPassword.value) {
             errorCheckEmail.value = false;
-            errorPasswordSame.value = true;
             emailErrorMsg.value = "";
+            errorPasswordSame.value = true;
             passwordErrorMsg.value = "The password doesn't match";
+            setTimeout(function () {
+                errorPasswordSame.value = false;
+                passwordErrorMsg.value = "";
+            }, 3000);
         } else if (!checkPassword(password.value)) {
             errorPasswordSame.value = false;
             errorCheckPassword.value = true;
             passwordErrorMsg.value =
-                "Passwords must contain at least six characters, including uppercase, lowercase, numbers and special character";
+                "Passwords must contain at least six characters, one number and one special character";
+            setTimeout(function () {
+                errorCheckPassword.value = false;
+                passwordErrorMsg.value = "";
+            }, 6000);
         } else {
             // calls the user from store and send the users info to backend to login
             await user.signUp(email.value, password.value);
-            formConfirm.value = false;
+            // formConfirm.value = false;
             errorCheckPassword.value = false;
             passwordErrorMsg.value = null;
             alert(
