@@ -198,7 +198,7 @@ const handleSignUp = async () => {
             errorCheckPassword.value = false;
             passwordErrorMsg.value = null;
             alert(
-                `We send you an email to ${email.value} please confirm to start join Listito`
+                `We've sent you an email to ${email.value}, please confirm to join Listito`
             );
             redirect.push({ path: "/auth/login" });
         }
