@@ -20,7 +20,6 @@ export const useUserStore = defineStore("user", {
       if (user) {
         this.user = user;
         // console.log(this.user);
-        // alert("Registro comprobado, se enviará un email para la activación");
       }
     },
     // Login the user 
@@ -38,7 +37,7 @@ export const useUserStore = defineStore("user", {
       if (error) throw error;
       if (user) {
         this.user = user;
-        console.log(this.user);
+        // console.log(this.user);
       }
     },
     // Logout the user
@@ -68,27 +67,4 @@ export const useUserStore = defineStore("user", {
       },
     ],
   },
-  /* -----------------------------------------------------*/
-  // async handleSignup(credentials: Credentials) {
-  //   try {
-  //     const { email, password } = credentials;
-  //     // Avisa al usuario si no ha rellenado sus credenciales
-  //     if (!email || !password) {
-  //       alert("Por favor introduce el correo y la contraseña.");
-  //       return;
-  //     }
-  //     const { error } = await supabase.auth.signUp({ email, password });
-  //     if (error) {
-  //       alert(error.message);
-  //       console.error(error, error.message);
-  //       return;
-  //     }
-  //     alert("Registro comprobado, se enviará un email para la activación");
-  //   } catch (err) {
-  //     alert("¡Lo sentimos ha ocurrido un error de inicio!");
-  //     console.error("Error de singin", err);
-  //   }
-  // },
-  /* -----------------------------------------------------*/
-
 });
