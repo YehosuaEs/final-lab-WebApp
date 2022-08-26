@@ -2,7 +2,10 @@
     <Nav />
     <Header />
     <div class="containerMain">
-        <img src="../assets/Humaaans.png" alt="human" />
+        <img
+            src="https://res.cloudinary.com/medianube/image/upload/v1661520151/human_Sitting_on_Rock.png"
+            alt="human"
+        />
         <div class="button_continer">
             <ButtonAddTask @click="handleAdd" />
         </div>
