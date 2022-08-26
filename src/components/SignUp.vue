@@ -133,7 +133,7 @@ const checkEmail = (email) => {
 // To verify correct password
 const checkPassword = (password) => {
     const strongPassword =
-        /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,50}$/;
+        /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*\.,\-_]{6,50}$/;
     return strongPassword.test(password);
 };
 // To hide and show password
