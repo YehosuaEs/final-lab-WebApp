@@ -3,7 +3,10 @@
         <div class="container">
             <div class="titleContainer">
                 <div class="titleContainer_logo">
-                    <img src="../assets/Listito.png" alt="logo Listito" />
+                    <img
+                        src="https://res.cloudinary.com/medianube/image/upload/v1661514190/Listito_u9p4fy.png"
+                        alt="logo Listito"
+                    />
                     <h1>Listito</h1>
                 </div>
                 <p>Your to-do list App</p>
@@ -26,7 +29,7 @@
                             name="email"
                             id="email"
                             v-model="email"
-                            placeholder="Enter your Email"
+                            placeholder="Enter your e-mail"
                             class="input"
                             :class="errorCheckEmail ? 'errorInput' : 'input'"
                         />
@@ -44,7 +47,7 @@
                             name="password"
                             id="password"
                             v-model="password"
-                            placeholder="Enter your Password"
+                            placeholder="Enter your password"
                             class="input"
                             :class="
                                 errorPasswordSame || errorCheckPassword
@@ -67,11 +70,11 @@
                             ><p><!-- Repeat Password --></p></label
                         >
                         <input
-                            type="password"
+                            :type="passwordInputType"
                             name="repeatPassword"
                             id="repeatPassword"
                             v-model="repeatPassword"
-                            placeholder="Confirm your Password"
+                            placeholder="Confirm your password"
                             class="input"
                             :class="
                                 errorPasswordSame || errorCheckPassword
@@ -79,6 +82,13 @@
                                     : 'input'
                             "
                         />
+                        <i
+                            :class="passwordIconClick"
+                            @click="hidePassword = !hidePassword"
+                            class="material-icons iconEye"
+                        >
+                            {{ icon }}
+                        </i>
                     </div>
                     <!-- ------- button submit ------- -->
                     <div>
@@ -172,7 +182,7 @@ const handleSignUp = async () => {
             setTimeout(function () {
                 errorCheckEmail.value = false;
                 emailErrorMsg.value = "";
-            }, 3000);
+            }, 5000);
         } else if (password.value !== repeatPassword.value) {
             errorCheckEmail.value = false;
             emailErrorMsg.value = "";
@@ -181,7 +191,7 @@ const handleSignUp = async () => {
             setTimeout(function () {
                 errorPasswordSame.value = false;
                 passwordErrorMsg.value = "";
-            }, 3000);
+            }, 5000);
         } else if (!checkPassword(password.value)) {
             errorPasswordSame.value = false;
             errorCheckPassword.value = true;
@@ -190,7 +200,7 @@ const handleSignUp = async () => {
             setTimeout(function () {
                 errorCheckPassword.value = false;
                 passwordErrorMsg.value = "";
-            }, 6000);
+            }, 5000);
         } else {
             // calls the user from store and send the users info to backend to login
             await user.signUp(email.value, password.value);
@@ -226,13 +236,14 @@ section {
 
 .titleContainer {
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 60px;
 }
 
 .titleContainer_logo {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 15px;
 }
 
 img {
@@ -278,7 +289,7 @@ img {
 .errormsg {
     color: #f24452;
     font-size: 14px;
-    margin-left: 0.7rem;
+    margin-top: 0.5rem;
 }
 
 .passwordInput {

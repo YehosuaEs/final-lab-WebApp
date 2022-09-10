@@ -3,7 +3,10 @@
         <div class="container">
             <div class="titleContainer">
                 <div class="titleContainer_logo">
-                    <img src="../assets/Listito.png" alt="logo Listito" />
+                    <img
+                        src="https://res.cloudinary.com/medianube/image/upload/v1661514190/Listito_u9p4fy.png"
+                        alt="logo Listito"
+                    />
                     <h1>Listito</h1>
                 </div>
                 <p>Your to-do list App</p>
@@ -26,7 +29,7 @@
                             name="email"
                             id="email"
                             v-model="email"
-                            placeholder="Enter your Email"
+                            placeholder="Enter your e-mail"
                             class="input"
                         />
                     </div>
@@ -42,7 +45,7 @@
                             name="password"
                             id="password"
                             v-model="password"
-                            placeholder="Enter your Password"
+                            placeholder="Enter your password"
                             class="input"
                         />
                         <i
@@ -80,7 +83,7 @@ import { storeToRefs } from "pinia";
 
 // Route Variables
 const route = "/auth/sign-up";
-const buttonText = "Sign Up";
+const buttonText = "Sign up";
 
 // Access to the constants store
 const user = useUserStore();
@@ -151,6 +154,7 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 15px;
 }
 
 img {
