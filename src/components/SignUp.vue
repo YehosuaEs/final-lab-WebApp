@@ -43,7 +43,7 @@
                             ><p><!-- Password --></p></label
                         >
                         <input
-                            :type="passwordInputType"
+                            :type="passwordTypeVisibility"
                             name="password"
                             id="password"
                             v-model="password"
@@ -56,7 +56,7 @@
                             "
                         />
                         <i
-                            :class="passwordIconClick"
+                            :class="passwordTypeVisibility"
                             @click="hidePassword = !hidePassword"
                             class="material-icons iconEye"
                         >
@@ -70,7 +70,7 @@
                             ><p><!-- Repeat Password --></p></label
                         >
                         <input
-                            :type="passwordInputType"
+                            :type="passwordRepeatTypeVisibility"
                             name="repeatPassword"
                             id="repeatPassword"
                             v-model="repeatPassword"
@@ -83,11 +83,11 @@
                             "
                         />
                         <i
-                            :class="passwordIconClick"
-                            @click="hidePassword = !hidePassword"
+                            :class="passwordRepeatTypeVisibility"
+                            @click="hidePasswordRepeat = !hidePasswordRepeat"
                             class="material-icons iconEye"
                         >
-                            {{ icon }}
+                            {{ iconRepeat }}
                         </i>
                     </div>
                     <!-- ------- button submit ------- -->
@@ -131,7 +131,9 @@ const repeatPassword = ref("");
 
 // Icons Show and hide password & const to manage
 const hidePassword = ref(true);
+const hidePasswordRepeat = ref(true);
 const icon = ref("visibility_off");
+const iconRepeat = ref("visibility_off");
 
 /* -----------------------METHODS and FUNCTIONS----------------------- */
 // To verify correct email
@@ -146,16 +148,16 @@ const checkPassword = (password) => {
         /^(?=.*[0-9])(?=.*[!@#$%^&*\.,\-_])[a-zA-Z0-9!@#$%^&*\.,\-_]{6,50}$/;
     return strongPassword.test(password);
 };
-// To hide and show password
-const passwordIconClick = computed(() =>
+const passwordTypeVisibility = computed(() =>
     hidePassword.value
-        ? (icon.value = "visibility")
-        : (icon.value = "visibility_off")
+        ? (icon.value = "visibility") && "password"
+        : (icon.value = "visibility_off") && "text"
 );
-const passwordInputType = computed(() =>
-    hidePassword.value ? "password" : "text"
+const passwordRepeatTypeVisibility = computed(() =>
+    hidePasswordRepeat.value
+        ? (iconRepeat.value = "visibility") && "password"
+        : (iconRepeat.value = "visibility_off") && "text"
 );
-
 // Error Message
 const errorMsg = ref("");
 const emailErrorMsg = ref("");
